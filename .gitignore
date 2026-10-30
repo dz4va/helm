@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+out/
+tsconfig.tsbuildinfo
+
+# Local SQLite database (personal data — never commit)
+db/helm.db
+db/helm.db-shm
+db/helm.db-wal
+db/helm.db-journal
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.local

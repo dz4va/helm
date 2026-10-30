@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #fafafa;
+}
+
+body {
+  color: var(--foreground);
+  /* Quiet terracotta dot grid + a corner glow underneath it, both fixed to
+     the viewport so they stay put while scrolling. background-color needs
+     !important because <body> also carries the `bg-helm-bg` Tailwind
+     utility class, whose class-selector specificity otherwise beats this
+     plain `body {}` element selector and fully hides both layers - the
+     other background-* properties aren't touched by that class, so they
+     don't need it. */
+  background-color: var(--background) !important;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(193, 127, 89, 0.07) 1px, transparent 0),
+    radial-gradient(circle at 0% 0%, rgba(193, 127, 89, 0.14), transparent 55%);
+  background-size: 24px 24px, auto;
+  background-repeat: repeat, no-repeat;
+  background-position: 0 0, 0 0;
+  background-attachment: fixed, fixed;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1f1f1f;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
+}
+
+/* Pixel pet modal animations */
+@keyframes pet-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-pet-float {
+  animation: pet-float 2.4s ease-in-out infinite;
+}
+
+/* Smaller-amplitude float for the pet at Dock icon size, so it doesn't
+   clip against neighboring dock items. */
+@keyframes pet-float-sm {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+.animate-pet-float-sm {
+  animation: pet-float-sm 2.4s ease-in-out infinite;
+}
+
+@keyframes pet-sparkle {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: translateY(-48px) scale(1); opacity: 0; }
+}
+.animate-pet-sparkle {
+  animation: pet-sparkle 1.8s ease-out infinite;
+}
+
+/* Undertale-style dialogue: each revealed character pops in individually. */
+@keyframes pet-char-pop {
+  0% { transform: translateY(2px) scale(0.6); opacity: 0; }
+  60% { transform: translateY(-1px) scale(1.15); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.animate-pet-char-pop {
+  animation: pet-char-pop 0.18s ease-out;
+}
+
+/* One-shot heart burst for click-to-pet reactions. */
+@keyframes pet-heart-pop {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  30% { opacity: 1; transform: translateY(-10px) scale(1.15); }
+  100% { transform: translateY(-42px) scale(0.9); opacity: 0; }
+}
+.animate-pet-heart-pop {
+  animation: pet-heart-pop 1s ease-out forwards;
+}
